@@ -18,4 +18,26 @@ namespace JeuxDuPendu
             Application.Run(new GameForm());
         }
     }
+
+
+    //Random world from text file
+   public class RandomWord
+        {
+            private string[] words;
+            private Random random = new Random();
+    
+            public RandomWord()
+            {
+                words = System.IO.File.ReadAllLines(@"C:\tmp\Pendu.txt");
+            }
+    
+            public string GetRandomWord()
+            {
+                return words[random.Next(words.Length)];
+            }
+        }
+    
+    
+        
+
 }
