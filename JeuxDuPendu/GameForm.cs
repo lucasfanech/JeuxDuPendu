@@ -49,7 +49,7 @@ namespace JeuxDuPendu
             // Methode de reinitialisation classe d'affichage du pendu.
             _HangmanViewer.Reset();
             // appel de la classe RandomWord
-            RandomWord randomWord = new RandomWord();
+            randomWords randomWord = new randomWords();
             
             // On recupere un mot aleatoire
             this.word = randomWord.GetRandomWord();
