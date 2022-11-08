@@ -28,7 +28,7 @@ namespace JeuxDuPendu
     
             public RandomWord()
             {
-                words = System.IO.File.ReadAllLines(@"C:\tmp\Pendu.txt");
+                words = System.IO.File.ReadAllLines(@.\Ressources\Pendu.txt");
             }
     
             public string GetRandomWord()

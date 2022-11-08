@@ -19,3 +19,14 @@ D:\_DEV\C#\JeuxDuPendu\JeuxDuPendu\obj\Debug\JeuxDuPendu.csproj.GenerateResource
 D:\_DEV\C#\JeuxDuPendu\JeuxDuPendu\obj\Debug\JeuxDuPendu.csproj.CoreCompileInputs.cache
 D:\_DEV\C#\JeuxDuPendu\JeuxDuPendu\obj\Debug\JeuxDuPendu.exe
 D:\_DEV\C#\JeuxDuPendu\JeuxDuPendu\obj\Debug\JeuxDuPendu.pdb
+C:\Dev\Jeu du Pendu\JeuxDuPendu\JeuxDuPendu\bin\Debug\JeuxDuPendu.exe.config
+C:\Dev\Jeu du Pendu\JeuxDuPendu\JeuxDuPendu\bin\Debug\JeuxDuPendu.exe
+C:\Dev\Jeu du Pendu\JeuxDuPendu\JeuxDuPendu\bin\Debug\JeuxDuPendu.pdb
+C:\Dev\Jeu du Pendu\JeuxDuPendu\JeuxDuPendu\obj\Debug\JeuxDuPendu.csproj.AssemblyReference.cache
+C:\Dev\Jeu du Pendu\JeuxDuPendu\JeuxDuPendu\obj\Debug\JeuxDuPendu.csproj.SuggestedBindingRedirects.cache
+C:\Dev\Jeu du Pendu\JeuxDuPendu\JeuxDuPendu\obj\Debug\JeuxDuPendu.GameForm.resources
+C:\Dev\Jeu du Pendu\JeuxDuPendu\JeuxDuPendu\obj\Debug\JeuxDuPendu.Properties.Resources.resources
+C:\Dev\Jeu du Pendu\JeuxDuPendu\JeuxDuPendu\obj\Debug\JeuxDuPendu.csproj.GenerateResource.cache
+C:\Dev\Jeu du Pendu\JeuxDuPendu\JeuxDuPendu\obj\Debug\JeuxDuPendu.csproj.CoreCompileInputs.cache
+C:\Dev\Jeu du Pendu\JeuxDuPendu\JeuxDuPendu\obj\Debug\JeuxDuPendu.exe
+C:\Dev\Jeu du Pendu\JeuxDuPendu\JeuxDuPendu\obj\Debug\JeuxDuPendu.pdb
