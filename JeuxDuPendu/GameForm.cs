@@ -16,6 +16,9 @@ namespace JeuxDuPendu
         // Initialisation de l'instance de la classe d'affichage du pendu.
         HangmanViewer _HangmanViewer = new HangmanViewer();
         String word = "";
+        // appel de la classe RandomWord
+        randomWords randomWord = new randomWords();
+
         /// <summary>
         /// Constructeur du formulaire de jeux
         /// </summary>
@@ -46,10 +49,10 @@ namespace JeuxDuPendu
         /// </summary>
         public void StartNewGame()
         {
+            usedLetters.Text = "";
+            randomWord.ClearLettersUsed();
             // Methode de reinitialisation classe d'affichage du pendu.
             _HangmanViewer.Reset();
-            // appel de la classe RandomWord
-            randomWords randomWord = new randomWords();
             
             // On recupere un mot aleatoire
             this.word = randomWord.GetRandomWord();
@@ -94,44 +97,59 @@ namespace JeuxDuPendu
 
         private void KeyPressed(char letter)
         {
-            // On verifie si la lettre est présente dans le mot
-            if (word.Contains(letter))
+            // On vérifie si la lettre est présente dans la liste des lettres déjà utilisées
+            if (randomWord.GetLettersUsed().Contains(letter.ToString()))
             {
-                // on regarde combien de fois la lettre est présente dans le mot
-                int letterCount = word.Count(c => c == letter);
-                int letterPosition;
-                // on parcours le mot
-                for (int i = 0; i < letterCount; i++)
-                {
-                    // on recupere la position de la lettre
-                    letterPosition = word.IndexOf(letter);
-                    // on remplace le tiret par la lettre
-                    lCrypedWord.Text = lCrypedWord.Text.Remove(letterPosition, 1).Insert(letterPosition, letter.ToString());
-                    // on remplace la lettre par un tiret
-                    word = word.Remove(letterPosition, 1).Insert(letterPosition, "-");
-                }
-                // on verifie si le mot est trouvé
-                if (lCrypedWord.Text == lCrypedWord.Text.Replace("-", ""))
-                {
-                    // on affiche un message de victoire
-                    MessageBox.Show("Vous avez gagné !");
-                    // on relance une nouvelle partie
-                    StartNewGame();
-                }
+                // Si oui, on affiche un message d'erreur
+                MessageBox.Show("Vous avez déjà utilisé cette lettre", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                // On avance le pendu d'une etape
-                _HangmanViewer.MoveNextStep();
+                // Sinon, on ajoute la lettre à la liste des lettres déjà utilisées
+                randomWord.AddLetterUsed(letter.ToString());
+                // Afficher la liste des lettres déjà utilisées
+                usedLetters.Text = "Lettres utilisées: "+randomWord.GetLettersUsed().Aggregate((i, j) => i + ", " + j);
+                
 
-                // Si le pendu est complet, le joueur à perdu.
-                if (_HangmanViewer.IsGameOver)
+                // On verifie si la lettre est présente dans le mot
+                if (word.Contains(letter))
                 {
-                    MessageBox.Show("Vous avez perdu !");
-                    StartNewGame();
+                    // on regarde combien de fois la lettre est présente dans le mot
+                    int letterCount = word.Count(c => c == letter);
+                    int letterPosition;
+                    // on parcours le mot
+                    for (int i = 0; i < letterCount; i++)
+                    {
+                        // on recupere la position de la lettre
+                        letterPosition = word.IndexOf(letter);
+                        // on remplace le tiret par la lettre
+                        lCrypedWord.Text = lCrypedWord.Text.Remove(letterPosition, 1).Insert(letterPosition, letter.ToString());
+                        // on remplace la lettre par un tiret
+                        word = word.Remove(letterPosition, 1).Insert(letterPosition, "-");
+                    }
+                    // on verifie si le mot est trouvé
+                    if (lCrypedWord.Text == lCrypedWord.Text.Replace("-", ""))
+                    {
+                        // on affiche un message de victoire
+                        MessageBox.Show("Vous avez gagné !");
+                        // on relance une nouvelle partie
+                        StartNewGame();
+                    }
                 }
+                else
+                {
+                    // On avance le pendu d'une etape
+                    _HangmanViewer.MoveNextStep();
+
+                    // Si le pendu est complet, le joueur à perdu.
+                    if (_HangmanViewer.IsGameOver)
+                    {
+                        MessageBox.Show("Vous avez perdu !");
+                        StartNewGame();
+                    }
+                }
+
             }
-            
         }
 
         private void GameForm_Load(object sender, EventArgs e)

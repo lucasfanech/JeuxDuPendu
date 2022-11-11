@@ -12,6 +12,7 @@ namespace JeuxDuPendu
     {
         private string[] words;
         private string[] allWords;
+        private List<string> lettersUsed = new List<string>();
         private Random random = new Random();
 
         public randomWords()
@@ -28,7 +29,26 @@ namespace JeuxDuPendu
         {
             return words[random.Next(words.Length)];
         }
+
+        // getter lettersUsed
+        public List<string> GetLettersUsed()
+        {
+            return lettersUsed;
+        }
+
+        // add letter to lettersUsed
+        public void AddLetterUsed(string letter)
+        {
+            lettersUsed.Add(letter);
+        }
+
+        // clear lettersUsed
+        public void ClearLettersUsed()
+        {
+            lettersUsed.Clear();
+        }
+
     }
-    
+
 
 }

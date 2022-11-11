@@ -31,22 +31,21 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.bReset = new System.Windows.Forms.Button();
             this.lCrypedWord = new System.Windows.Forms.Label();
+            this.usedLetters = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(16, 15);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Location = new System.Drawing.Point(104, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(341, 315);
+            this.panel1.Size = new System.Drawing.Size(288, 297);
             this.panel1.TabIndex = 0;
             // 
             // bReset
             // 
-            this.bReset.Location = new System.Drawing.Point(123, 393);
-            this.bReset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bReset.Location = new System.Drawing.Point(196, 402);
             this.bReset.Name = "bReset";
-            this.bReset.Size = new System.Drawing.Size(120, 43);
+            this.bReset.Size = new System.Drawing.Size(90, 35);
             this.bReset.TabIndex = 1;
             this.bReset.Text = "Nouvelle partie";
             this.bReset.UseVisualStyleBackColor = true;
@@ -56,28 +55,36 @@
             // lCrypedWord
             // 
             this.lCrypedWord.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lCrypedWord.Location = new System.Drawing.Point(13, 341);
-            this.lCrypedWord.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lCrypedWord.Location = new System.Drawing.Point(115, 323);
             this.lCrypedWord.Name = "lCrypedWord";
-            this.lCrypedWord.Size = new System.Drawing.Size(340, 48);
+            this.lCrypedWord.Size = new System.Drawing.Size(255, 39);
             this.lCrypedWord.TabIndex = 2;
             this.lCrypedWord.Text = "--";
             this.lCrypedWord.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // usedLetters
+            // 
+            this.usedLetters.AutoSize = true;
+            this.usedLetters.Location = new System.Drawing.Point(183, 362);
+            this.usedLetters.Name = "usedLetters";
+            this.usedLetters.Size = new System.Drawing.Size(0, 13);
+            this.usedLetters.TabIndex = 3;
+            // 
             // GameForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 447);
+            this.ClientSize = new System.Drawing.Size(472, 449);
+            this.Controls.Add(this.usedLetters);
             this.Controls.Add(this.lCrypedWord);
             this.Controls.Add(this.bReset);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "GameForm";
             this.Text = "Jeux du pendu";
             this.Load += new System.EventHandler(this.GameForm_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.GameForm_KeyPress);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -86,6 +93,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button bReset;
         private System.Windows.Forms.Label lCrypedWord;
+        private System.Windows.Forms.Label usedLetters;
     }
 }
 
