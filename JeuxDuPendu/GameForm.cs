@@ -53,9 +53,16 @@ namespace JeuxDuPendu
             randomWord.ClearLettersUsed();
             // Methode de reinitialisation classe d'affichage du pendu.
             _HangmanViewer.Reset();
-            
-            // On recupere un mot aleatoire
-            this.word = randomWord.GetRandomWord();
+
+            // On recupere un mot aleatoire par défaut ou importé
+            if (defaultWords.Checked)
+            {
+                this.word = randomWord.GetRandomWord(0);
+            }
+            else
+            {
+                this.word = randomWord.GetRandomWord(1);
+            }   
             // On recupere la première lettre
             char firstLetter = word[0];
             // compte le nombre de lettre
@@ -155,6 +162,28 @@ namespace JeuxDuPendu
         private void GameForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void importedWords_CheckedChanged(object sender, EventArgs e)
+        {
+            if (importedWords.Checked)
+            {
+                defaultWords.Checked = false;
+            }
+            else
+            {
+                defaultWords.Checked = true;
+            }
+        }
+
+        private void defaultWords_CheckedChanged(object sender, EventArgs e)
+        {
+            if (defaultWords.Checked){
+                importedWords.Checked = false;
+            }
+            else {
+                importedWords.Checked = true;
+            }
         }
     }
 

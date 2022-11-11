@@ -12,11 +12,15 @@ namespace JeuxDuPendu
     {
         private string[] words;
         private string[] allWords;
+        private string[] defaultWords;
         private List<string> lettersUsed = new List<string>();
         private Random random = new Random();
 
         public randomWords()
         {
+            // Ajout de Mots par défaut dans le tableau defaultWords
+            defaultWords = new string[10] { "Pomme", "Orange", "Fraise", "Banane", "Poire", "Ananas", "Melon", "Pêche", "Abricot", "Kiwi" };
+
             // get Ressources path
             string workingDirectory = Environment.CurrentDirectory;
             string path = Path.Combine(Directory.GetParent(workingDirectory).Parent.Parent.FullName, @"JeuxDuPendu\Resources\Pendu.txt");
@@ -25,9 +29,17 @@ namespace JeuxDuPendu
             // parse words[0] 
             words = allWords[0].Split(' ');
         }
-        public string GetRandomWord()
+        public string GetRandomWord(int option)
         {
-            return words[random.Next(words.Length)];
+            if (option == 0)
+            {
+                return defaultWords[random.Next(0, defaultWords.Length)];
+            }
+            else
+            {
+                return words[random.Next(words.Length)];
+            }
+            
         }
 
         // getter lettersUsed

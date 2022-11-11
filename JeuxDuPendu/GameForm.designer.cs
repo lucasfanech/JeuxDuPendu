@@ -32,6 +32,8 @@
             this.bReset = new System.Windows.Forms.Button();
             this.lCrypedWord = new System.Windows.Forms.Label();
             this.usedLetters = new System.Windows.Forms.Label();
+            this.defaultWords = new System.Windows.Forms.CheckBox();
+            this.importedWords = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // panel1
@@ -70,11 +72,37 @@
             this.usedLetters.Size = new System.Drawing.Size(0, 13);
             this.usedLetters.TabIndex = 3;
             // 
+            // defaultWords
+            // 
+            this.defaultWords.AutoSize = true;
+            this.defaultWords.Location = new System.Drawing.Point(99, 389);
+            this.defaultWords.Name = "defaultWords";
+            this.defaultWords.Size = new System.Drawing.Size(100, 17);
+            this.defaultWords.TabIndex = 4;
+            this.defaultWords.Text = "Mots par défaut";
+            this.defaultWords.UseVisualStyleBackColor = true;
+            this.defaultWords.CheckedChanged += new System.EventHandler(this.defaultWords_CheckedChanged);
+            // 
+            // importedWords
+            // 
+            this.importedWords.AutoSize = true;
+            this.importedWords.Checked = true;
+            this.importedWords.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.importedWords.Location = new System.Drawing.Point(99, 412);
+            this.importedWords.Name = "importedWords";
+            this.importedWords.Size = new System.Drawing.Size(91, 17);
+            this.importedWords.TabIndex = 5;
+            this.importedWords.Text = "Mots importés";
+            this.importedWords.UseVisualStyleBackColor = true;
+            this.importedWords.CheckedChanged += new System.EventHandler(this.importedWords_CheckedChanged);
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(472, 449);
+            this.Controls.Add(this.importedWords);
+            this.Controls.Add(this.defaultWords);
             this.Controls.Add(this.usedLetters);
             this.Controls.Add(this.lCrypedWord);
             this.Controls.Add(this.bReset);
@@ -94,6 +122,8 @@
         private System.Windows.Forms.Button bReset;
         private System.Windows.Forms.Label lCrypedWord;
         private System.Windows.Forms.Label usedLetters;
+        private System.Windows.Forms.CheckBox defaultWords;
+        private System.Windows.Forms.CheckBox importedWords;
     }
 }
 
