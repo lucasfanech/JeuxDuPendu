@@ -110,6 +110,14 @@ namespace JeuxDuPendu
                     // on remplace la lettre par un tiret
                     word = word.Remove(letterPosition, 1).Insert(letterPosition, "-");
                 }
+                // on verifie si le mot est trouvé
+                if (lCrypedWord.Text == lCrypedWord.Text.Replace("-", ""))
+                {
+                    // on affiche un message de victoire
+                    MessageBox.Show("Vous avez gagné !");
+                    // on relance une nouvelle partie
+                    StartNewGame();
+                }
             }
             else
             {
