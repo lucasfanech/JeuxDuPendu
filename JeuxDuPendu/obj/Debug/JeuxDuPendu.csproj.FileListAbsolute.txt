@@ -19,3 +19,4 @@ D:\_DEV\C#\JeuxDuPendu\JeuxDuPendu\obj\Debug\JeuxDuPendu.csproj.GenerateResource
 D:\_DEV\C#\JeuxDuPendu\JeuxDuPendu\obj\Debug\JeuxDuPendu.csproj.CoreCompileInputs.cache
 D:\_DEV\C#\JeuxDuPendu\JeuxDuPendu\obj\Debug\JeuxDuPendu.exe
 D:\_DEV\C#\JeuxDuPendu\JeuxDuPendu\obj\Debug\JeuxDuPendu.pdb
+D:\_DEV\C#\JeuxDuPendu\JeuxDuPendu\obj\Debug\JeuxDuPendu.Menu.resources
