@@ -62,9 +62,12 @@ namespace JeuxDuPendu
             else
             {
                 this.word = randomWord.GetRandomWord(1);
-            }   
+            }
+            // TO DO : Difficulté
             // On recupere la première lettre
             char firstLetter = word[0];
+            
+
             // compte le nombre de lettre
             int letterCount = word.Length;
             // lCrypedWord.Text = firstLetter
@@ -74,7 +77,25 @@ namespace JeuxDuPendu
                 // On affiche le mot crypté
                 lCrypedWord.Text += "-";
             }
-            
+
+            // TO DO : Difficulté
+            // Vérifier si la première lettre existe à un autre emplacement
+
+            // on regarde combien de fois la lettre est présente dans le mot
+            letterCount = word.Count(c => c == firstLetter);
+            int letterPosition;
+            // on parcours le mot
+            for (int i = 0; i < letterCount; i++)
+            {
+                // on recupere la position de la lettre
+                letterPosition = word.IndexOf(firstLetter);
+                // on remplace le tiret par la lettre
+                lCrypedWord.Text = lCrypedWord.Text.Remove(letterPosition, 1).Insert(letterPosition, firstLetter.ToString());
+                // on remplace la lettre par un tiret
+                word = word.Remove(letterPosition, 1).Insert(letterPosition, "-");
+            }
+            randomWord.AddLetterUsed(firstLetter.ToString());
+
         }
 
 
