@@ -19,7 +19,7 @@ namespace JeuxDuPendu
         public randomWords()
         {
             // Ajout de Mots par défaut dans le tableau defaultWords
-            defaultWords = new string[10] { "Pomme", "Orange", "Fraise", "Banane", "Poire", "Ananas", "Melon", "Pêche", "Abricot", "Kiwi" };
+            defaultWords = new string[10] { "Pomme", "Orange", "Fraise", "Banane", "Poire", "Ananas", "Melon", "Peche", "Abricot", "Kiwi" };
 
             // get Ressources path
             string workingDirectory = Environment.CurrentDirectory;

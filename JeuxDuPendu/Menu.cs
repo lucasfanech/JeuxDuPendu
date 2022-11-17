@@ -23,5 +23,12 @@ namespace JeuxDuPendu
             GameForm gameForm = new GameForm();
             gameForm.Show();
         }
+
+        private void localMode_Click(object sender, EventArgs e)
+        {
+            // show GameForm
+            GameForm gameFormLocal = new GameForm(1);
+            gameFormLocal.Show();
+        }
     }
 }

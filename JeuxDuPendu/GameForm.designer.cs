@@ -34,6 +34,9 @@
             this.usedLetters = new System.Windows.Forms.Label();
             this.defaultWords = new System.Windows.Forms.CheckBox();
             this.importedWords = new System.Windows.Forms.CheckBox();
+            this.player = new System.Windows.Forms.Label();
+            this.points = new System.Windows.Forms.Label();
+            this.sortie = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // panel1
@@ -96,11 +99,40 @@
             this.importedWords.UseVisualStyleBackColor = true;
             this.importedWords.CheckedChanged += new System.EventHandler(this.importedWords_CheckedChanged);
             // 
+            // player
+            // 
+            this.player.AutoSize = true;
+            this.player.Location = new System.Drawing.Point(13, 323);
+            this.player.Name = "player";
+            this.player.Size = new System.Drawing.Size(0, 13);
+            this.player.TabIndex = 6;
+            // 
+            // points
+            // 
+            this.points.AutoSize = true;
+            this.points.Location = new System.Drawing.Point(13, 380);
+            this.points.Name = "points";
+            this.points.Size = new System.Drawing.Size(0, 13);
+            this.points.TabIndex = 7;
+            // 
+            // sortie
+            // 
+            this.sortie.Location = new System.Drawing.Point(99, 455);
+            this.sortie.Name = "sortie";
+            this.sortie.ReadOnly = true;
+            this.sortie.Size = new System.Drawing.Size(293, 80);
+            this.sortie.TabIndex = 8;
+            this.sortie.Text = "";
+            this.sortie.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 449);
+            this.ClientSize = new System.Drawing.Size(472, 547);
+            this.Controls.Add(this.sortie);
+            this.Controls.Add(this.points);
+            this.Controls.Add(this.player);
             this.Controls.Add(this.importedWords);
             this.Controls.Add(this.defaultWords);
             this.Controls.Add(this.usedLetters);
@@ -124,6 +156,9 @@
         private System.Windows.Forms.Label usedLetters;
         private System.Windows.Forms.CheckBox defaultWords;
         private System.Windows.Forms.CheckBox importedWords;
+        private System.Windows.Forms.Label player;
+        private System.Windows.Forms.Label points;
+        private System.Windows.Forms.RichTextBox sortie;
     }
 }
 

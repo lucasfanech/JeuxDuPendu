@@ -18,6 +18,10 @@ namespace JeuxDuPendu
         String word = "";
         // appel de la classe RandomWord
         randomWords randomWord = new randomWords();
+        int mode = 0;
+        int nbPlayers = 1;
+        int[] score;
+        int currentPlayer = 1;
 
         /// <summary>
         /// Constructeur du formulaire de jeux
@@ -27,6 +31,36 @@ namespace JeuxDuPendu
             InitializeComponent();
             InitializeMyComponent();
             StartNewGame();
+        }
+
+        public GameForm(int modeInterne)
+        {   
+            // Mode Multijoueur Local
+            if (modeInterne == 1)
+            {
+                this.mode = 1;
+                InitializeComponent();
+                InitializeMyComponent();
+                StartNewGame();
+                nbPlayers = HowManyPlayers();
+                // Initalialise début de game
+                if (nbPlayers > 0 && nbPlayers < 7)
+                {
+                    // score for each player
+                    score = new int[nbPlayers];
+                    // set 0 to each player
+                    for (int i = 0; i < nbPlayers; i++)
+                    {
+                        score[i] = 0;
+                    }
+                    currentPlayer = 1;
+                    this.player.Text = "J"+ currentPlayer.ToString();
+                    this.points.Text = score[0].ToString()+" pts";
+
+                    
+                }
+            }
+            
         }
 
         /// <summary>
@@ -163,6 +197,25 @@ namespace JeuxDuPendu
                         // on relance une nouvelle partie
                         StartNewGame();
                     }
+
+                    // Ajout des points
+                    if (mode == 1)
+                    {
+                        // si letter est une voyelle + 1 point à score[currentPlayer - 1]
+                        if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u' || letter == 'y')
+                        {
+                            score[currentPlayer - 1] += 1;
+                            sortie.Text += currentPlayer + " a gagné " + 1 + " points en trouvant la lettre " + letter+"\n";
+                        }
+                        // si letter est une consonne + 2 points à score[currentPlayer - 1]
+                        else
+                        {
+                            score[currentPlayer - 1] += 2;
+                            sortie.Text += currentPlayer + " a gagné " + 2 + " points en trouvant la lettre " + letter+"\n";
+                        }
+                    }
+
+
                 }
                 else
                 {
@@ -176,6 +229,25 @@ namespace JeuxDuPendu
                         StartNewGame();
                     }
                 }
+
+                if (mode == 1) {
+                    // Joueur suivant
+                    if (currentPlayer < nbPlayers)
+                    { currentPlayer++; }
+                    else { currentPlayer = 1; }
+                    this.player.Text = "J" + currentPlayer.ToString();
+                    this.points.Text = score[currentPlayer - 1].ToString();
+                    // Recap du score
+                    for (int i = 0; i < nbPlayers; i++)
+                    {
+                        sortie.Text += "J" + (i + 1) + " : " + score[i] + " pts | ";
+                        
+                    }
+                    sortie.Text += "\n";
+
+                }
+                
+
 
             }
         }
@@ -206,6 +278,46 @@ namespace JeuxDuPendu
                 importedWords.Checked = true;
             }
         }
-    }
 
+
+
+        // Multiplayer
+        // HowManyPlayer
+
+        private int HowManyPlayers()
+        {
+            {
+                
+
+                // On demande au joueur combien de joueurs vont jouer
+                int nbPlayers = 0;
+
+                // InputBox
+                // On demande au joueur combien de joueurs vont jouer
+                nbPlayers = Convert.ToInt32(Microsoft.VisualBasic.Interaction.InputBox("Combien de joueurs vont jouer ?", "Nombre de joueurs", "1", -1, -1));
+                
+
+                // On vérifie que le nombre de joueurs est compris entre 2 et 6
+                if (nbPlayers < 2 || nbPlayers > 6)
+                {
+                    // Si ce n'est pas le cas, on affiche un message d'erreur
+                    MessageBox.Show("Le nombre de joueurs doit être compris entre 1 et 4", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // On relance la méthode
+                    HowManyPlayers();
+                }
+                else
+                {
+                    MessageBox.Show("Lancement de la partie avec " + nbPlayers + " joueurs");
+                   
+                }
+                return nbPlayers;
+            }
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
