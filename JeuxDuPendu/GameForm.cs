@@ -25,6 +25,8 @@ namespace JeuxDuPendu
         int nbPlayers = 1;
         int[] score;
         int currentPlayer = 1;
+        int attempts = 0;
+        int idPlayer = 0;
         private Socket ClientSocket = new Socket
             (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         /// <summary>
@@ -71,6 +73,8 @@ namespace JeuxDuPendu
                 InitializeComponent();
                 InitializeMyComponent();
                 StartNewGame();
+                
+                
 
 
             }
@@ -96,21 +100,37 @@ namespace JeuxDuPendu
         /// <summary>
         /// Initialise une nouvelle partie
         /// </summary>
-        public void StartNewGame()
+        public void StartNewGame(string selectedWord = null, string player = null)
         {
+            if (player != null)
+            {
+                this.player.Text = "J"+player+"(Online)";
+                idPlayer = int.Parse(player);
+            }
+            else
+            {
+                this.player.Text = "";
+            }
+            attempts = 0;
             usedLetters.Text = "";
             randomWord.ClearLettersUsed();
             // Methode de reinitialisation classe d'affichage du pendu.
             _HangmanViewer.Reset();
 
-            // On recupere un mot aleatoire par défaut ou importé
-            if (defaultWords.Checked)
-            {
-                this.word = randomWord.GetRandomWord(0);
+            // Si aucun mot est défini par le serveur, On recupere un mot aleatoire par défaut ou importé
+            if (selectedWord == null) {
+                if (defaultWords.Checked)
+                {
+                    this.word = randomWord.GetRandomWord(0);
+                }
+                else
+                {
+                    this.word = randomWord.GetRandomWord(1);
+                }
             }
             else
             {
-                this.word = randomWord.GetRandomWord(1);
+                this.word = selectedWord;
             }
             // TO DO : Difficulté
             // On recupere la première lettre
@@ -120,12 +140,15 @@ namespace JeuxDuPendu
             // compte le nombre de lettre
             int letterCount = word.Length;
             // lCrypedWord.Text = firstLetter
+
+            // if thread so invoke
             lCrypedWord.Text = new string(firstLetter, 1);
             for (int i = 0; i < letterCount-1; i++)
             {
                 // On affiche le mot crypté
                 lCrypedWord.Text += "-";
             }
+            
 
             // TO DO : Difficulté
             // Vérifier si la première lettre existe à un autre emplacement
@@ -185,6 +208,7 @@ namespace JeuxDuPendu
                 }
                 else
                 {
+                    attempts++;
                     // Sinon, on ajoute la lettre à la liste des lettres déjà utilisées
                     randomWord.AddLetterUsed(letter.ToString());
                     // Afficher la liste des lettres déjà utilisées
@@ -211,14 +235,16 @@ namespace JeuxDuPendu
                         if (lCrypedWord.Text == lCrypedWord.Text.Replace("-", ""))
                         {
                             // on affiche un message de victoire
-                            MessageBox.Show("Vous avez gagné !");
+                            MessageBox.Show("Vous avez gagné en "+ attempts+" essais!");
+                            // On envoie au serveur qu'on a gagné 
+                            if (mode == 2)
+                            {
+                                send("/win " + idPlayer + " " + attempts);
+                            }
                             // on relance une nouvelle partie
                             StartNewGame();
 
-                            if (mode == 2)
-                            {
-                                send("Client a gagné \n");
-                            }
+                            
                         }
 
                         // Ajout des points
@@ -249,6 +275,11 @@ namespace JeuxDuPendu
                         if (_HangmanViewer.IsGameOver)
                         {
                             MessageBox.Show("Vous avez perdu !");
+                            // On envoie au serveur qu'on a perdu
+                            if (mode == 2)
+                            {
+                                send("/loose " + idPlayer);
+                            }
                             StartNewGame();
                         }
                     }

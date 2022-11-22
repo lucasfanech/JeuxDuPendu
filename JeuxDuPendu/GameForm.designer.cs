@@ -1,4 +1,6 @@
-﻿namespace JeuxDuPendu
+﻿using System.Windows.Forms;
+
+namespace JeuxDuPendu
 {
     partial class GameForm
     {
@@ -28,6 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Control.CheckForIllegalCrossThreadCalls = false;
             this.panel1 = new System.Windows.Forms.Panel();
             this.bReset = new System.Windows.Forms.Button();
             this.lCrypedWord = new System.Windows.Forms.Label();

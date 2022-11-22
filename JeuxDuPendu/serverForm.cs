@@ -22,7 +22,9 @@ namespace JeuxDuPendu
 
         private static List<int> _list = new List<int>();
         private const int PORT = 3500;
-        
+        public static GameForm gameForm = null;
+
+
         public serverForm()
         {
             InitializeComponent();
@@ -51,10 +53,11 @@ namespace JeuxDuPendu
         private void RequestLoop()
         {
 
-            GameForm gameForm = new GameForm(2);
+            gameForm = new GameForm(2);
             gameForm.Show();
             gameForm.setSocket(ClientSocket);
             new System.Threading.Thread(ReceiveResponse).Start();
+            
 
         }
 
@@ -95,10 +98,11 @@ namespace JeuxDuPendu
             ClientSocket.Send(buffer, 0, buffer.Length, SocketFlags.None);
         }
 
-        private static void ReceiveResponse()
+        private void ReceiveResponse()
         {
             while (true)
             {
+                
                 var buffer = new byte[2048];
                 int received = ClientSocket.Receive(buffer, SocketFlags.None);
                 if (received == 0) return;
@@ -106,7 +110,24 @@ namespace JeuxDuPendu
                 Array.Copy(buffer, data, received);
                 string text = Encoding.ASCII.GetString(data);
                 Console.WriteLine("Text received : " + text);
+
+                
+
+                // if text contains /find 
+                if (text.Contains("/find"))
+                {
+                    // split text
+                    string[] words = text.Split(' ');
+                    // get the word
+                    string word = words[1];
+                    // get the player
+                    string player = words[2];
+
+                    // send the word to the gameForm
+                    gameForm.StartNewGame(word, player);
+                }
             }
+                
         }
 
         private void Connect_Click(object sender, EventArgs e)
