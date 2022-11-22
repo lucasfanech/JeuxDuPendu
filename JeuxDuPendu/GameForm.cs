@@ -197,6 +197,7 @@ namespace JeuxDuPendu
 
         private void KeyPressed(char letter)
         {
+            bool isWin = false;
             // On vérifie que la touche appuyé est une lettre entre a et z
             if (letter >= 'a' && letter <= 'z')
             {
@@ -262,6 +263,8 @@ namespace JeuxDuPendu
                                 score[currentPlayer - 1] += 2;
                                 sortie.Text += currentPlayer + " a gagné " + 2 + " points en trouvant la lettre " + letter + "\n";
                             }
+
+                            isWin = true;
                         }
 
 
@@ -286,10 +289,14 @@ namespace JeuxDuPendu
 
                     if (mode == 1)
                     {
-                        // Joueur suivant
-                        if (currentPlayer < nbPlayers)
-                        { currentPlayer++; }
-                        else { currentPlayer = 1; }
+                        if (!isWin)
+                        {
+                            // Joueur suivant
+                            if (currentPlayer < nbPlayers)
+                            { currentPlayer++; }
+                            else { currentPlayer = 1; }
+                        }
+                        
                         this.player.Text = "J" + currentPlayer.ToString();
                         this.points.Text = score[currentPlayer - 1].ToString();
                         // Recap du score
