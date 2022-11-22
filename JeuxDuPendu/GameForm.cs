@@ -159,97 +159,103 @@ namespace JeuxDuPendu
 
         private void KeyPressed(char letter)
         {
-            // On vérifie si la lettre est présente dans la liste des lettres déjà utilisées
-            if (randomWord.GetLettersUsed().Contains(letter.ToString()))
+            // On vérifie que la touche appuyé est une lettre entre a et z
+            if (letter >= 'a' && letter <= 'z')
             {
-                // Si oui, on affiche un message d'erreur
-                MessageBox.Show("Vous avez déjà utilisé cette lettre", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                // Sinon, on ajoute la lettre à la liste des lettres déjà utilisées
-                randomWord.AddLetterUsed(letter.ToString());
-                // Afficher la liste des lettres déjà utilisées
-                usedLetters.Text = "Lettres utilisées: "+randomWord.GetLettersUsed().Aggregate((i, j) => i + ", " + j);
-                
-
-                // On verifie si la lettre est présente dans le mot
-                if (word.Contains(letter))
+                // On vérifie si la lettre est présente dans la liste des lettres déjà utilisées
+                if (randomWord.GetLettersUsed().Contains(letter.ToString()))
                 {
-                    // on regarde combien de fois la lettre est présente dans le mot
-                    int letterCount = word.Count(c => c == letter);
-                    int letterPosition;
-                    // on parcours le mot
-                    for (int i = 0; i < letterCount; i++)
-                    {
-                        // on recupere la position de la lettre
-                        letterPosition = word.IndexOf(letter);
-                        // on remplace le tiret par la lettre
-                        lCrypedWord.Text = lCrypedWord.Text.Remove(letterPosition, 1).Insert(letterPosition, letter.ToString());
-                        // on remplace la lettre par un tiret
-                        word = word.Remove(letterPosition, 1).Insert(letterPosition, "-");
-                    }
-                    // on verifie si le mot est trouvé
-                    if (lCrypedWord.Text == lCrypedWord.Text.Replace("-", ""))
-                    {
-                        // on affiche un message de victoire
-                        MessageBox.Show("Vous avez gagné !");
-                        // on relance une nouvelle partie
-                        StartNewGame();
-                    }
-
-                    // Ajout des points
-                    if (mode == 1)
-                    {
-                        // si letter est une voyelle + 1 point à score[currentPlayer - 1]
-                        if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u' || letter == 'y')
-                        {
-                            score[currentPlayer - 1] += 1;
-                            sortie.Text += currentPlayer + " a gagné " + 1 + " points en trouvant la lettre " + letter+"\n";
-                        }
-                        // si letter est une consonne + 2 points à score[currentPlayer - 1]
-                        else
-                        {
-                            score[currentPlayer - 1] += 2;
-                            sortie.Text += currentPlayer + " a gagné " + 2 + " points en trouvant la lettre " + letter+"\n";
-                        }
-                    }
-
-
+                    // Si oui, on affiche un message d'erreur
+                    MessageBox.Show("Vous avez déjà utilisé cette lettre", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    // On avance le pendu d'une etape
-                    _HangmanViewer.MoveNextStep();
+                    // Sinon, on ajoute la lettre à la liste des lettres déjà utilisées
+                    randomWord.AddLetterUsed(letter.ToString());
+                    // Afficher la liste des lettres déjà utilisées
+                    usedLetters.Text = "Lettres utilisées: " + randomWord.GetLettersUsed().Aggregate((i, j) => i + ", " + j);
 
-                    // Si le pendu est complet, le joueur à perdu.
-                    if (_HangmanViewer.IsGameOver)
+
+                    // On verifie si la lettre est présente dans le mot
+                    if (word.Contains(letter))
                     {
-                        MessageBox.Show("Vous avez perdu !");
-                        StartNewGame();
-                    }
-                }
+                        // on regarde combien de fois la lettre est présente dans le mot
+                        int letterCount = word.Count(c => c == letter);
+                        int letterPosition;
+                        // on parcours le mot
+                        for (int i = 0; i < letterCount; i++)
+                        {
+                            // on recupere la position de la lettre
+                            letterPosition = word.IndexOf(letter);
+                            // on remplace le tiret par la lettre
+                            lCrypedWord.Text = lCrypedWord.Text.Remove(letterPosition, 1).Insert(letterPosition, letter.ToString());
+                            // on remplace la lettre par un tiret
+                            word = word.Remove(letterPosition, 1).Insert(letterPosition, "-");
+                        }
+                        // on verifie si le mot est trouvé
+                        if (lCrypedWord.Text == lCrypedWord.Text.Replace("-", ""))
+                        {
+                            // on affiche un message de victoire
+                            MessageBox.Show("Vous avez gagné !");
+                            // on relance une nouvelle partie
+                            StartNewGame();
+                        }
 
-                if (mode == 1) {
-                    // Joueur suivant
-                    if (currentPlayer < nbPlayers)
-                    { currentPlayer++; }
-                    else { currentPlayer = 1; }
-                    this.player.Text = "J" + currentPlayer.ToString();
-                    this.points.Text = score[currentPlayer - 1].ToString();
-                    // Recap du score
-                    for (int i = 0; i < nbPlayers; i++)
+                        // Ajout des points
+                        if (mode == 1)
+                        {
+                            // si letter est une voyelle + 1 point à score[currentPlayer - 1]
+                            if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u' || letter == 'y')
+                            {
+                                score[currentPlayer - 1] += 1;
+                                sortie.Text += currentPlayer + " a gagné " + 1 + " points en trouvant la lettre " + letter + "\n";
+                            }
+                            // si letter est une consonne + 2 points à score[currentPlayer - 1]
+                            else
+                            {
+                                score[currentPlayer - 1] += 2;
+                                sortie.Text += currentPlayer + " a gagné " + 2 + " points en trouvant la lettre " + letter + "\n";
+                            }
+                        }
+
+
+                    }
+                    else
                     {
-                        sortie.Text += "J" + (i + 1) + " : " + score[i] + " pts | ";
-                        
+                        // On avance le pendu d'une etape
+                        _HangmanViewer.MoveNextStep();
+
+                        // Si le pendu est complet, le joueur à perdu.
+                        if (_HangmanViewer.IsGameOver)
+                        {
+                            MessageBox.Show("Vous avez perdu !");
+                            StartNewGame();
+                        }
                     }
-                    sortie.Text += "\n";
+
+                    if (mode == 1)
+                    {
+                        // Joueur suivant
+                        if (currentPlayer < nbPlayers)
+                        { currentPlayer++; }
+                        else { currentPlayer = 1; }
+                        this.player.Text = "J" + currentPlayer.ToString();
+                        this.points.Text = score[currentPlayer - 1].ToString();
+                        // Recap du score
+                        for (int i = 0; i < nbPlayers; i++)
+                        {
+                            sortie.Text += "J" + (i + 1) + " : " + score[i] + " pts | ";
+
+                        }
+                        sortie.Text += "\n";
+
+                    }
+
+
 
                 }
-                
-
-
             }
+            
         }
 
         private void GameForm_Load(object sender, EventArgs e)
