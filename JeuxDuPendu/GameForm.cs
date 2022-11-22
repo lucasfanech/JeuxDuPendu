@@ -4,9 +4,12 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
 using JeuxDuPendu.MyControls;
+using Microsoft.VisualBasic;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace JeuxDuPendu
 {
@@ -22,7 +25,8 @@ namespace JeuxDuPendu
         int nbPlayers = 1;
         int[] score;
         int currentPlayer = 1;
-
+        private Socket ClientSocket = new Socket
+            (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         /// <summary>
         /// Constructeur du formulaire de jeux
         /// </summary>
@@ -60,7 +64,18 @@ namespace JeuxDuPendu
                     
                 }
             }
-            
+            else if (modeInterne == 2)
+            {
+                // Mode Multijoueur en réseau
+                this.mode = 2;
+                InitializeComponent();
+                InitializeMyComponent();
+                StartNewGame();
+
+
+            }
+
+
         }
 
         /// <summary>
@@ -199,6 +214,11 @@ namespace JeuxDuPendu
                             MessageBox.Show("Vous avez gagné !");
                             // on relance une nouvelle partie
                             StartNewGame();
+
+                            if (mode == 2)
+                            {
+                                send("Client a gagné \n");
+                            }
                         }
 
                         // Ajout des points
@@ -324,6 +344,34 @@ namespace JeuxDuPendu
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        public void setSocket(Socket s)
+        {
+            ClientSocket = s;
+           
+        }
+        private void send(string texte) {
+
+            byte[] buffer = Encoding.ASCII.GetBytes(texte);
+            ClientSocket.Send(buffer, 0, buffer.Length, SocketFlags.None);
+
+        }
+
+        // On Form close
+
+        private void GameForm_FormClosing_1(object sender, FormClosingEventArgs e)
+        {
+            if (mode == 2)
+            {
+                // On envoie un message au serveur pour lui dire que le client se déconnecte
+                send("exit");
+                // On ferme la connexion
+                ClientSocket.Shutdown(SocketShutdown.Both);
+                ClientSocket.Close();
+                Environment.Exit(0);
+            }
+            
         }
     }
 }

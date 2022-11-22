@@ -38,19 +38,18 @@
             // 
             this.titleGame.AutoSize = true;
             this.titleGame.Font = new System.Drawing.Font("Cooper Black", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleGame.Location = new System.Drawing.Point(221, 29);
-            this.titleGame.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.titleGame.Location = new System.Drawing.Point(295, 36);
             this.titleGame.Name = "titleGame";
-            this.titleGame.Size = new System.Drawing.Size(172, 50);
+            this.titleGame.Size = new System.Drawing.Size(219, 64);
             this.titleGame.TabIndex = 0;
             this.titleGame.Text = "Jeu du Pendu\r\nToruk Edition";
             // 
             // soloMode
             // 
-            this.soloMode.Location = new System.Drawing.Point(211, 251);
-            this.soloMode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.soloMode.Location = new System.Drawing.Point(281, 309);
+            this.soloMode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.soloMode.Name = "soloMode";
-            this.soloMode.Size = new System.Drawing.Size(182, 27);
+            this.soloMode.Size = new System.Drawing.Size(243, 33);
             this.soloMode.TabIndex = 1;
             this.soloMode.Text = "Toruk solo";
             this.soloMode.UseVisualStyleBackColor = true;
@@ -58,10 +57,10 @@
             // 
             // localMode
             // 
-            this.localMode.Location = new System.Drawing.Point(211, 283);
-            this.localMode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.localMode.Location = new System.Drawing.Point(281, 348);
+            this.localMode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.localMode.Name = "localMode";
-            this.localMode.Size = new System.Drawing.Size(182, 28);
+            this.localMode.Size = new System.Drawing.Size(243, 34);
             this.localMode.TabIndex = 2;
             this.localMode.Text = "Mode Multijoueur local";
             this.localMode.UseVisualStyleBackColor = true;
@@ -69,24 +68,25 @@
             // 
             // multiMode
             // 
-            this.multiMode.Location = new System.Drawing.Point(211, 315);
-            this.multiMode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.multiMode.Location = new System.Drawing.Point(281, 388);
+            this.multiMode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.multiMode.Name = "multiMode";
-            this.multiMode.Size = new System.Drawing.Size(182, 28);
+            this.multiMode.Size = new System.Drawing.Size(243, 34);
             this.multiMode.TabIndex = 3;
             this.multiMode.Text = "Mode Multijoueur Online";
             this.multiMode.UseVisualStyleBackColor = true;
+            this.multiMode.Click += new System.EventHandler(this.multiMode_Click);
             // 
             // Menu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.multiMode);
             this.Controls.Add(this.localMode);
             this.Controls.Add(this.soloMode);
             this.Controls.Add(this.titleGame);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Menu";
             this.Text = "Jeu du Pendu";
             this.ResumeLayout(false);

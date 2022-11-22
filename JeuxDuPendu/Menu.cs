@@ -30,5 +30,11 @@ namespace JeuxDuPendu
             GameForm gameFormLocal = new GameForm(1);
             gameFormLocal.Show();
         }
+
+        private void multiMode_Click(object sender, EventArgs e)
+        {
+            serverForm serverForm = new serverForm();
+            serverForm.Show();
+        }
     }
 }
